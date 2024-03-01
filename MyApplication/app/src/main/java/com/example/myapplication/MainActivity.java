@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.myapplication.Model.Complexe;
 import com.example.myapplication.databinding.ActivityMainBinding;
 import com.example.myapplication.http.RetrofitUtil;
 import com.example.myapplication.http.Service;
@@ -37,20 +38,20 @@ import retrofit2.Response;
             @Override
             public void onClick(View v) {
                 final EditText editText = findViewById(R.id.editTextText);
-                String chiffre = editText.getText().toString();
-                service.listRepos(chiffre + "").enqueue(new Callback<String>() {
+                String nom = editText.getText().toString();
+                service.listRepos(nom + "").enqueue(new Callback<Complexe>() {
                     @Override
-                    public void onResponse(Call<String> call, Response<String> response) {
+                    public void onResponse(Call<Complexe> call, Response<Complexe> response) {
                         if (response.isSuccessful()){
-                            String resultat = response.body();
-                            Toast.makeText(MainActivity.this, resultat, Toast.LENGTH_SHORT).show();
+                            Complexe resultat = response.body();
+                            Toast.makeText(MainActivity.this, resultat.toString(), Toast.LENGTH_SHORT).show();
                         } else {
                             
                         }
                     }
 
                     @Override
-                    public void onFailure(Call<String> call, Throwable t) {
+                    public void onFailure(Call<Complexe> call, Throwable t) {
                         Log.i("RETROFIT", t.getMessage());
                     }
                 });

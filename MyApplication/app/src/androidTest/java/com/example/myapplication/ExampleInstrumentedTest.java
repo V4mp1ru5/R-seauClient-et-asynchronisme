@@ -11,6 +11,7 @@ import org.junit.runner.RunWith;
 
 import static org.junit.Assert.*;
 
+import com.example.myapplication.Model.Complexe;
 import com.example.myapplication.http.RetrofitUtil;
 import com.example.myapplication.http.Service;
 
@@ -30,9 +31,9 @@ public class ExampleInstrumentedTest {
     @Test
     public void testSimple() throws IOException {
         Service service = RetrofitUtil.get();
-        Call<String> call = service.listRepos("4");
-        Response<String> response = call.execute();
-        String resultat = response.body();
+        Call<Complexe> call = service.listRepos("pablo");
+        Response<Complexe> response = call.execute();
+        Complexe resultat = response.body();
         Log.i("RETROFIT", String.valueOf(resultat));
     }
 }
